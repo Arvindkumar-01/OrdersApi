@@ -49,11 +49,27 @@ We are using **Swagger/OpenApi** for generating documentation of API. You can ac
           "40.6905615",
           "-73.9976592"
       ]
-   }```
+   }
+    ```
    
    * Response 
-     {
+     ```sh{
           'id':1,
           'distance':10434,
           'status':'UNASSIGNED'
          }
+     ```
+  2. Order List
+    
+    * Url `http://localhost:8080/api/v1/orders/page=1&limit=5`
+    * Method `GET`
+    * Headers `Content-Type:application/json`   
+   
+   * Response 
+     ```sh 
+         [
+         {'id':1,'distance':10,'status':'UNASSIGNED'},
+         {'id':2,'distance':10,'status':'UNASSIGNED'}
+         ]
+         
+     ```
