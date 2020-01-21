@@ -2,10 +2,6 @@
 
 API for list, place and take orders.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 * [Docker](https://docs.docker.com/install/) - Docker provides a way to run applications securely isolated in a container, packaged with all its dependencies and libraries.
@@ -37,6 +33,27 @@ All the test cases are written on `phpunit`.
 
 We are using **Swagger/OpenApi** for generating documentation of API. You can access documentation on `http://localhost:8080/api/documentation`
 
+## API Documentation 
 
-
-
+1. Place order API
+    * Url `http://localhost:8080/api/v1/orders`
+    * Method `POST`
+    * Headers `Content-Type:application/json`
+    * Request Body 
+    ```sh {
+      "origin": [
+          "40.6655101",
+          "-93.89188969999998"
+      ],
+      "destination": [
+          "40.6905615",
+          "-73.9976592"
+      ]
+   }```
+   
+   * Response 
+     {
+          'id':1,
+          'distance':10434,
+          'status':'UNASSIGNED'
+         }
