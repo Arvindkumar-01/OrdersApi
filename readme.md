@@ -6,85 +6,37 @@ API for list, place and take orders.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Software/Tools Prerequisites
+### Prerequisites
 
 * [Docker](https://docs.docker.com/install/) - Docker provides a way to run applications securely isolated in a container, packaged with all its dependencies and libraries.
-What things you need to install the software and how to install them
+* Git
 
+### Installation and run
+
+1. Take a clone from repository by running below command. 
 ```
-Give examples
+git clone https://github.com/Arvindkumar-01/OrdersApi.git
 ```
+2. Go to `src` folder. This folder contains all source code of application. 
+3. We are using Google distance matrix api in this application, so you need to set API key for using google API. You need to set
+`GOOGLE_MAP_API_KEY="YOUR_API_KEY"` in .env file located in `src` folder. You can create a new API Key from https://cloud.google.com/maps-platform/routes. 
 
-### Installing
+4. Run `start.sh` file located at root of directory. This script file bhild and run docker container, install required composer packages, run application migrations and run test cases. 
 
-A step by step series of examples that tell you how to get a development env running
+5. Server is accessible on `http://localhost:8080` .  
 
-Say what the step will be
+## Test Cases
+All the test cases are written on `phpunit`.
 
-```
-Give the example
-```
+### Manually running the tests
 
-And repeat
+1. Running unit test cases `docker exec app vendor/bin/phpunit tests/Unit/`
+2. Running feature test cases `docker exec app vendor/bin/phpunit tests/Feature/`
 
-```
-until finished
-```
+## Documentation
 
-End with an example of getting some data out of the system or using it for a little demo
+We are using **Swagger/OpenApi** for generating documentation of API. You can access documentation on `http://localhost:8080/api/documentation`
 
-## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
 
