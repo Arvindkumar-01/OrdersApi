@@ -9,11 +9,11 @@ echo "--- Installing composer packages ----"
 docker exec app composer install --prefer-dist
 
 # Generating application cache
-echo ""--- Generating application cache ---"
+echo "--- Generating application cache ---"
 docker exec app php artisan config:cache
 
 # Running migration of application 
-echo ""--- Running migration ---"
+echo "--- Running migration ---"
 docker exec app php artisan migrate
 
 # Providing permission for storage folder

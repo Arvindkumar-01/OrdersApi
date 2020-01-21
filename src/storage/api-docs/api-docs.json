@@ -17,7 +17,7 @@
         "/orders": {
             "get": {
                 "tags": [
-                    "Orders list"
+                    "Orders"
                 ],
                 "summary": "Get list of Orders",
                 "description": "Returns list of orders",
@@ -51,9 +51,9 @@
             },
             "post": {
                 "tags": [
-                    "Orders create"
+                    "Orders"
                 ],
-                "summary": "Create a new Order",
+                "summary": "Place Order",
                 "description": "Create a new Order",
                 "operationId": "StoreOrder",
                 "requestBody": {
@@ -104,7 +104,7 @@
         "/orders/{id}": {
             "patch": {
                 "tags": [
-                    "Order Update"
+                    "Orders"
                 ],
                 "description": "Take orders",
                 "operationId": "UpdateOrder",
@@ -141,7 +141,10 @@
                         "description": "{\"status\":\"SUCCESS\"}"
                     },
                     "422": {
-                        "description": "{'error':'Order is already taken'}"
+                        "description": "{'error':'Error message'}"
+                    },
+                    "404": {
+                        "description": "{'error':'404 not found'}"
                     }
                 }
             }

@@ -43,7 +43,7 @@ class OrderController extends Controller
      * @OA\Get(
      *      path="/orders",
      *      operationId="getOrdersList",
-     *      tags={"Orders list"},
+     *      tags={"Orders"},
      *      summary="Get list of Orders",
      *      description="Returns list of orders",
      *      @OA\Parameter(
@@ -87,8 +87,8 @@ class OrderController extends Controller
      * @OA\Post(
      *      path="/orders",
      *      operationId="StoreOrder",
-     *      tags={"Orders create"},
-     *      summary="Create a new Order",
+     *      tags={"Orders"},
+     *      summary="Place Order",
      *      description="Create a new Order",     
      *      @OA\RequestBody(
      *         required=true,
@@ -144,7 +144,7 @@ class OrderController extends Controller
      * @OA\Patch(
      *      path="/orders/{id}",
      *      operationId="UpdateOrder",
-     *      tags={"Order Update"},
+     *      tags={"Orders"},
      *      description="Take orders",
      *       @OA\Parameter(
      *              name="id",
