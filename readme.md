@@ -59,17 +59,26 @@ We are using **Swagger/OpenApi** for generating documentation of API. You can ac
           'status':'UNASSIGNED'
          }
      ```
-  2. Order List
-    
-    * Url `http://localhost:8080/api/v1/orders/page=1&limit=5`
-    * Method `GET`
-    * Headers `Content-Type:application/json`   
-   
-   * Response 
-     ```sh 
-         [
-         {'id':1,'distance':10,'status':'UNASSIGNED'},
-         {'id':2,'distance':10,'status':'UNASSIGNED'}
-         ]
-         
-     ```
+  2. Order List    
+       * Url `http://localhost:8080/api/v1/orders/page=1&limit=5`
+       * Method `GET`
+       * Headers `Content-Type:application/json`     
+       * Response 
+        ```sh 
+            [
+            {'id':1,'distance':10,'status':'UNASSIGNED'},
+            {'id':2,'distance':10,'status':'UNASSIGNED'}
+            ]         
+        ```
+   3. Take order
+       * Url `http://localhost:8080/api/v1/orders/3`
+       * Method `PATCH`
+       * Headers `Content-Type:application/json`
+       * Request Body
+       ```sh 
+          { "status": "TAKEN"}
+       ```
+       * Response 
+        ```sh 
+         {"status":"SUCCESS"}
+        ```
