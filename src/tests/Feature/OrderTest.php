@@ -9,6 +9,31 @@ class OrderTest extends TestCase
 {
     use DatabaseTransactions;
 
+
+    /**
+     * Test for Google API key missing
+     *
+     * @return void
+     */
+    public function testApiKeyMissing()
+    {
+        $inputData = [
+            "origin" => [
+                "40.6655101",
+                "-93.89188969999998",
+            ],
+            "destination" => [
+                "40.6905615",
+                "-73.9976592"
+            ]
+        ];
+
+        $response = $this->json('POST', '/orders', $inputData);
+        $data = json_decode($response->getContent(), true);
+        if ('Google maps API key is missing' == $data['error']) {
+            exit($data['error']);
+        }
+    }
     /**
      * Feature test for success order creation
      *
@@ -29,6 +54,7 @@ class OrderTest extends TestCase
 
         $response = $this->json('POST', '/orders', $inputData);
         $this->assertEquals(200, $response->getStatusCode());
+        $response->assertJsonStructure(['id', 'distance', 'status']);
     }
 
     /**
@@ -39,6 +65,7 @@ class OrderTest extends TestCase
         $response = $this->json('POST', '/orders', $input);
         $data = json_decode($response->getContent(), true);
         $this->assertEquals(422, $response->getStatusCode());
+        $response->assertJsonStructure(['error']);
     }
     /** 
      *  Data provider
@@ -47,22 +74,39 @@ class OrderTest extends TestCase
     {
         return [
             [
-                'origin' => [],
+                "origin" => [],
                 "destination" => ["40.6905", "-73.9976"]
             ],
             [
-                'origin' => ["40.6655", "-93.8918"],
+                "origin" => ["40.6655", "-93.8918"],
                 "destination" => []
             ],
             [
-                'origin' => ["40.6655101"],
+                "origin" => ["40.6655101"],
                 "destination" => ["40.6905615", "-73.9976592"]
             ],
             [
-                'origin' => ["40.6655101"],
+                "origin" => ["40.6655101"],
                 "destination" => ["40.6905615", -73.9976592]
-            ],
+            ]
         ];
+    }
+
+    /**
+     *  Test for same origin and destination lat long values 
+     */
+    public function testOrderCreationOnSameOriginDestination()
+    {
+        $input = [
+            "origin" => ["40.6655", "-93.8918"],
+            "destination" => ["40.6655", "-93.8918"]
+        ];
+        $response = $this->json('POST', '/orders', $input);
+        $data = json_decode($response->getContent(), true);
+        $this->assertEquals(422, $response->getStatusCode());
+        $response->assertJson([
+            "error" => "Destination and origin must be different."
+        ]);
     }
     /**
      *  Test for successfully order list
@@ -139,6 +183,8 @@ class OrderTest extends TestCase
             [['status' => '']],
             [['status' => 'xyz']],
             [['status' => 123]],
+            [['status' => 'taken']],
+            [['status' => 'Taken']]
         ];
     }
     /**
@@ -159,7 +205,7 @@ class OrderTest extends TestCase
 
         $response = $this->json('POST', '/orders', $inputData);
         $this->assertEquals(422, $response->getStatusCode());
-        $response->assertJson(['error' => 'Distance can not calculated for given lat long.']);
+        $response->assertJsonStructure(['error']);
     }
 
     /**
@@ -169,6 +215,28 @@ class OrderTest extends TestCase
     {
         $orderId = 0;
         $response = $this->json('patch', '/orders/' . $orderId, ['status' => 'TAKEN']);
+        $this->assertEquals(422, $response->getStatusCode());
+        $response->assertJsonStructure(['error']);
+    }
+    /**
+     *  Test case for order id missing for update
+     */
+    public function testOrderIdNotGivenOnUpdate()
+    {
+        $orderId = '';
+        $response = $this->json('patch', '/orders/' . $orderId, ['status' => 'TAKEN']);
+        $this->assertEquals(405, $response->getStatusCode());
+        $response->assertJsonStructure(['error']);
+    }
+
+    /**
+     *  Test case for order id not valid integer for update
+     */
+    public function testOrderIdNotValidOnUpdate()
+    {
+        $orderId = 'xyz';
+        $response = $this->json('patch', '/orders/' . $orderId, ['status' => 'TAKEN']);
         $this->assertEquals(404, $response->getStatusCode());
+        $response->assertJsonStructure(['error']);
     }
 }

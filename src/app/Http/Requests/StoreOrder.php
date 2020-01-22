@@ -30,7 +30,7 @@ class StoreOrder extends FormRequest
         return [
             'origin' => ['required', 'array', 'size:2', new ValidateLatLong],
             'origin.*' => 'required|string',
-            'destination' => ['required', 'array', 'size:2', new ValidateLatLong],
+            'destination' => ['required', 'array', 'size:2', new ValidateLatLong, 'different:origin'],
             'destination.*' => 'required|string',
         ];
     }
@@ -41,7 +41,8 @@ class StoreOrder extends FormRequest
             'origin.required' => __('message.origin_required'),
             'destination.required' => __('message.destination_required'),
             'origin.*.string' => __('message.origin_must_string'),
-            'destination.*.string' => __('message.destination_must_string')
+            'destination.*.string' => __('message.destination_must_string'),
+            'destination.different' => __('message.destination_must_different')
         ];
     }
 

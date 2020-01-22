@@ -84,6 +84,9 @@ class OrderRepository extends BaseRepository
 
     private function getDistance(array $data)
     {
+        if (null == config('constants.google_map_api_key')) {
+            return ['status' => false, 'error' => __('message.api_key_missing')];
+        }
         $g_routes = new GoogleRoutes();
         return $g_routes->calculate_distance($data);
     }
