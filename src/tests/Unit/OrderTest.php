@@ -7,9 +7,6 @@ use App\Http\Requests\ListOrder;
 use App\Http\Requests\StoreOrder;
 use App\Http\Requests\UpdateOrder;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Validation\ValidationException;
 
 class OrderTest extends TestCase
 {

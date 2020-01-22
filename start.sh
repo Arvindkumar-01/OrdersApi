@@ -1,8 +1,9 @@
+#!/bin/bash
 # Stop already running conaiters and volumes
 docker-compose down -v
 docker-compose build && docker-compose up -d
 
-sleep 20
+sleep 10
 
 # Installing composer packages 
 echo "--- Installing composer packages ----"
@@ -17,7 +18,7 @@ echo "--- Running migration ---"
 docker exec app php artisan migrate
 
 # Providing permission for storage folder
-docker exec app bash -c "chmod -R 777 storage"
+docker exec app bash -c "chmod -R 777 storage/*"
 
 # Running unit test cases 
 echo "--- Running Unit test cases ---"

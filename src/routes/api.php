@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,7 +13,7 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
-    $api->group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api'], function ($api) {
+    $api->group(['namespace' => 'App\Http\Controllers\Api'], function ($api) {
         $api->post('/orders', 'OrderController@store')->name('order.store');
         $api->patch('/orders/{id}', 'OrderController@update')->where('id', '[0-9]+')->name('order.update');
         $api->get('/orders', 'OrderController@list')->name('order.list');

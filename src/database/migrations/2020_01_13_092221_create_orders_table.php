@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->json('origin');
             $table->json('destination');
-            $table->bigInteger('total_distance')->default(0);
+            $table->bigInteger('distance')->default(0);
             $table->enum('status', ['UNASSIGNED', 'TAKEN'])->default('UNASSIGNED');
             $table->timestamps();
         });

@@ -13,7 +13,7 @@
 /**
  *  
  *  @OA\Server(
- *      url="/api/v1",
+ *      url="/",
  *      description="L5 Swagger OpenApi Server"
  * )
  */
@@ -24,9 +24,7 @@ use App\Http\Requests\ListOrder;
 use App\Http\Requests\StoreOrder;
 use App\Http\Requests\UpdateOrder;
 use Illuminate\Routing\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 use App\Repositories\OrderRepository;
 use Exception;
 
@@ -145,7 +143,8 @@ class OrderController extends Controller
      *      path="/orders/{id}",
      *      operationId="UpdateOrder",
      *      tags={"Orders"},
-     *      description="Take orders",
+     *      summary="Take Order",
+     *      description="Take order",
      *       @OA\Parameter(
      *              name="id",
      *              description="OrderId",

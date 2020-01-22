@@ -11,5 +11,6 @@ return [
     'destination_required' => 'Destination is required',
     'distance_not_found' => 'Distance can not calculated for given lat long.',
     'origin_must_string' => 'Origin parameter must be string',
-    'destination_must_string' => 'Destination parameter must be string'
+    'destination_must_string' => 'Destination parameter must be string',
+    'order_not_found' => 'Order not found'
 ];

@@ -31,12 +31,12 @@ All the test cases are written on `phpunit`.
 
 ## Documentation
 
-We are using **Swagger/OpenApi** for generating documentation of API. You can access documentation on `http://localhost:8080/api/documentation`
+We are using **Swagger/OpenApi** for generating documentation of API. You can access documentation on `http://localhost:8080/documentation`
 
 ## API Documentation 
 
 1. Place order API
-    * Url `http://localhost:8080/api/v1/orders`
+    * Url `http://localhost:8080/orders`
     * Method `POST`
     * Headers `Content-Type:application/json`
     * Request Body 
@@ -60,7 +60,7 @@ We are using **Swagger/OpenApi** for generating documentation of API. You can ac
          }
      ```
   2. Order List    
-       * Url `http://localhost:8080/api/v1/orders/page=1&limit=5`
+       * Url `http://localhost:8080/orders/page=1&limit=5`
        * Method `GET`
        * Headers `Content-Type:application/json`     
        * Response 
@@ -71,7 +71,7 @@ We are using **Swagger/OpenApi** for generating documentation of API. You can ac
             ]         
         ```
    3. Take order
-       * Url `http://localhost:8080/api/v1/orders/3`
+       * Url `http://localhost:8080/orders/3`
        * Method `PATCH`
        * Headers `Content-Type:application/json`
        * Request Body

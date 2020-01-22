@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
 use App\Services\GoogleRoutes;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -32,7 +31,7 @@ class OrderRepository extends BaseRepository
         $offset = ($this->currentPage - 1) * $this->perPage;
         return $this->entity->offset($offset)
             ->limit($this->perPage)
-            ->select(['id', 'total_distance AS distance', 'status'])
+            ->select(['id', 'distance', 'status'])
             ->get();
     }
     /**
@@ -48,13 +47,13 @@ class OrderRepository extends BaseRepository
         if ($distance_data['status'] == false) {
             return ['status' => false, 'data' => ['error' => $distance_data['error']]];
         }
-        $postdata['total_distance'] =  $distance_data['total_distance'];
+        $postdata['distance'] =  $distance_data['total_distance'];
         $order = $this->entity->create($postdata);
         return [
             'status' => true,
             'data' => [
                 'id' => $order->id,
-                'distance' => $order->total_distance,
+                'distance' => $order->distance,
                 'status' => $order->status
             ]
         ];
@@ -79,7 +78,7 @@ class OrderRepository extends BaseRepository
         } catch (\Exception $ex) {
             DB::rollBack();
             \Log::error($ex->getMessage());
-            throw new ModelNotFoundException();
+            return ['status' => false, 'error' => __('message.order_not_found')];
         }
     }
 

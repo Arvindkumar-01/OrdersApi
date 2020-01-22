@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class OrderTest extends TestCase
@@ -29,7 +27,7 @@ class OrderTest extends TestCase
             ]
         ];
 
-        $response = $this->json('POST', '/api/v1/orders', $inputData);
+        $response = $this->json('POST', '/orders', $inputData);
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -38,7 +36,7 @@ class OrderTest extends TestCase
      */
     public function testFailureOrderCreation($input)
     {
-        $response = $this->json('POST', '/api/v1/orders', $input);
+        $response = $this->json('POST', '/orders', $input);
         $data = json_decode($response->getContent(), true);
         $this->assertEquals(422, $response->getStatusCode());
     }
@@ -71,7 +69,7 @@ class OrderTest extends TestCase
      */
     public function testSuccessOrderList()
     {
-        $response = $this->json('GET', '/api/v1/orders', ['limit' => 10, 'page' => 1]);
+        $response = $this->json('GET', '/orders', ['limit' => 10, 'page' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
     }
     /**
@@ -80,7 +78,7 @@ class OrderTest extends TestCase
      */
     public function testFailureOrderList($params)
     {
-        $response = $this->json('GET', '/api/v1/orders', $params);
+        $response = $this->json('GET', '/orders', $params);
         $this->assertEquals(422, $response->getStatusCode());
     }
 
@@ -114,13 +112,13 @@ class OrderTest extends TestCase
             ]
         ];
 
-        $response = $this->json('POST', '/api/v1/orders', $inputData);
+        $response = $this->json('POST', '/orders', $inputData);
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode($response->getContent(), true);
         $orderId = $data['id'];
         // Test for update order 
         $input = ['status' => 'TAKEN'];
-        $response = $this->json('patch', '/api/v1/orders/' . $orderId, $input);
+        $response = $this->json('patch', '/orders/' . $orderId, $input);
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertJson(['status' => 'SUCCESS']);
     }
@@ -131,7 +129,7 @@ class OrderTest extends TestCase
     public function testFailureOrderUpdate($postdata)
     {
         $orderId = 1;
-        $response = $this->json('patch', '/api/v1/orders/' . $orderId, $postdata);
+        $response = $this->json('patch', '/orders/' . $orderId, $postdata);
         $this->assertEquals(422, $response->getStatusCode());
     }
 
@@ -159,7 +157,7 @@ class OrderTest extends TestCase
             ]
         ];
 
-        $response = $this->json('POST', '/api/v1/orders', $inputData);
+        $response = $this->json('POST', '/orders', $inputData);
         $this->assertEquals(422, $response->getStatusCode());
         $response->assertJson(['error' => 'Distance can not calculated for given lat long.']);
     }
@@ -170,7 +168,7 @@ class OrderTest extends TestCase
     public function testOrderNotFoundOnUpdate()
     {
         $orderId = 0;
-        $response = $this->json('patch', '/api/v1/orders/' . $orderId, ['status' => 'TAKEN']);
+        $response = $this->json('patch', '/orders/' . $orderId, ['status' => 'TAKEN']);
         $this->assertEquals(404, $response->getStatusCode());
     }
 }
