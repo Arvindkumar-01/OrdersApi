@@ -30,9 +30,11 @@ class OrderTest extends TestCase
 
         $response = $this->json('POST', '/orders', $inputData);
         $data = json_decode($response->getContent(), true);
-        if ('Google maps API key is missing' == $data['error']) {
-            exit($data['error']);
+        if ($response->getStatusCode() == 422) {
+            echo "\n" . $data['error'] . "\n";
+            exit();
         }
+        $this->assertEquals(200, $response->getStatusCode());
     }
     /**
      * Feature test for success order creation
