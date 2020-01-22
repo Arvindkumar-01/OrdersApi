@@ -20,7 +20,7 @@ class OrderTest extends TestCase
         $inputData = [
             "origin" => [
                 "40.6655101",
-                "-93.89188969999998",
+                "-93.89188969999998"
             ],
             "destination" => [
                 "40.6905615",

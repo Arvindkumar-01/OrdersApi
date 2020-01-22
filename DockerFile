@@ -21,3 +21,4 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 COPY ./src /var/www
 RUN chown -R www-data:www-data /var/www
+RUN chmod -R 777 /var/www/storage
