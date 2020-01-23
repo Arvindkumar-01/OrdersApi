@@ -5,6 +5,7 @@ docker-compose build && docker-compose up -d
 
 sleep 10
 
+
 # Installing composer packages 
 echo "--- Installing composer packages ----"
 docker exec app composer install --prefer-dist
