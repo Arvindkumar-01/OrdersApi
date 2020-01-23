@@ -18,7 +18,10 @@ echo "--- Running migration ---"
 docker exec app php artisan migrate
 
 # Providing permission for storage folder
-#docker exec app bash -c "chmod -R 777 storage/*"
+docker exec app bash -c "chmod -R 777 storage/*"
+
+# Generating Swagger documentation
+docker exec app php artisan l5-swagger:generate
 
 # Running unit test cases 
 echo "--- Running Unit test cases ---"
