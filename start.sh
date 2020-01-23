@@ -10,8 +10,8 @@ echo "--- Installing composer packages ----"
 docker exec app composer install --prefer-dist
 
 # Generating application cache
-echo "--- Generating application cache ---"
-docker exec app php artisan config:cache
+echo "--- Clear application cache ---"
+docker exec app php artisan config:clear
 
 # Running migration of application 
 echo "--- Running migration ---"
