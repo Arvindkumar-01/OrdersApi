@@ -15,9 +15,9 @@ git clone https://github.com/Arvindkumar-01/OrdersApi.git
 ```
 2. Go to `src` folder. This folder contains all source code of application. 
 3. We are using Google distance matrix api in this application, so you need to set API key for using google API. You need to set
-`GOOGLE_MAP_API_KEY="YOUR_API_KEY"` in .env file located in `src` folder. You can create a new API Key from https://cloud.google.com/maps-platform/routes. 
+`GOOGLE_MAP_API_KEY="YOUR_API_KEY"` in `.env` file located in `src` folder. You can create a new API Key from https://cloud.google.com/maps-platform/routes. 
 
-4. Run `start.sh` file located at root of directory. This script file bhild and run docker container, install required composer packages, run application migrations and run test cases. 
+4. Run `start.sh` file located at root of directory. This script file build and run docker container, install required composer packages, run application migrations and run test cases. 
 
 5. Server is accessible on `http://localhost:8080` .  
 

@@ -142,10 +142,7 @@
                         "description": "{\"status\":\"SUCCESS\"}"
                     },
                     "422": {
-                        "description": "{'error':'Error message'}"
-                    },
-                    "404": {
-                        "description": "{'error':'404 not found'}"
+                        "description": "{'error':'Order status already TAKEN'}"
                     }
                 }
             }

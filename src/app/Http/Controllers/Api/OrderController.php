@@ -173,11 +173,7 @@ class OrderController extends Controller
      *       @OA\Response(
      *              response=422, 
      *              description="{'error':'Order status already TAKEN'}"
-     *          ),
-     *      @OA\Response(
-     *              response=422, 
-     *              description="{'error':'Order not found'}"
-     *          ),
+     *          )     *       
      *     )
      *
      */

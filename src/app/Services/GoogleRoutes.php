@@ -52,8 +52,7 @@ class GoogleRoutes
                 'error' => $e->getMessage()
             ];
         }
-        //  Log::info('--------- Guzzle Http Response ------');
-        //  Log::info($response);
+
         return $response;
     }
 

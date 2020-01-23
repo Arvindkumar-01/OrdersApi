@@ -29,11 +29,7 @@ services:
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
       MYSQL_ROOT_PASSWORD: "root"
-      SERVICE_NAME: mysql
-    #volumes:
-      # - ./mysql/init:/docker-entrypoint-initdb.d
-      # - dbdata:/var/lib/mysql/
-      # - ./mysql/my.cnf:/etc/mysql/my.cnf
+      SERVICE_NAME: mysql    
     networks:
       - app-network
   #PHP Service
@@ -49,8 +45,7 @@ services:
       SERVICE_NAME: app
       DB_HOST: db
     working_dir: /var/www
-    volumes:
-      # - ./src:/var/www
+    volumes:      
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network

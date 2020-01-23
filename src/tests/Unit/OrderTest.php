@@ -68,6 +68,8 @@ class OrderTest extends TestCase
             [['origin' => ["40.6655101", "0"], 'destination' => ["0", "0"]], "Error Message", 422],
             [['origin' => ["40.6655101", "-93.89188969999998"], 'destination' => ["40.6905615", "-73.9976592", 0]], "The destination must contain 2 items.", 422],
             [['origin' => ["140.6655101", "-93.89188969999998"], 'destination' => ["40.6905615", "-73.9976592"]], "origin is a valid Lat Long", 422],
+            [['origin' => ["40.6655101", "-93.89188969999998"], 'destination' => ["40.6655101", "-93.89188969999998"]], "Destination and origin must be different.", 422],
+
         ];
     }
     public function testSuccessOrderList()
@@ -103,6 +105,7 @@ class OrderTest extends TestCase
         $data = json_decode($response->getContent(), true);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('status', $data);
+        $this->assertJson('{"status":"SUCCESS"}', $response->getContent());
     }
     /**
      * @dataProvider provideOrderUpdateData
@@ -125,7 +128,8 @@ class OrderTest extends TestCase
         return [
             [1, '', 'Status is required', 422],
             [1, 'XYZ', 'Status is invalid', 422],
-            [0, 'TAKEN', 'Not Found', 422]
+            [0, 'TAKEN', 'Order not Found', 422],
+            [1, 'taken', 'Status is invalid', 422]
         ];
     }
 
