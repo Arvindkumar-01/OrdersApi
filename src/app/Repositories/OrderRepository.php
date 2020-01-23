@@ -77,7 +77,6 @@ class OrderRepository extends BaseRepository
             return ['status' => false, 'error' => __('message.status_update_fail')];
         } catch (\Exception $ex) {
             DB::rollBack();
-            \Log::error($ex->getMessage());
             return ['status' => false, 'error' => __('message.order_not_found')];
         }
     }
