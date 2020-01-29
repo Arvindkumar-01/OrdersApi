@@ -3,13 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class OrderTest extends TestCase
 {
-    use DatabaseTransactions;
-
-
     /**
      * Test for Google API key missing
      *
